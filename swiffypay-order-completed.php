@@ -94,7 +94,7 @@ function swiffypay_swiffypay_missing_notice() {
 }
 
 
-function swiffypay_auto_complete_by_payment_method($order_id)
+function swiffypay_order_auto_complete_by_payment_method($order_id)
 {
     if (!$order_id) {
         return;
