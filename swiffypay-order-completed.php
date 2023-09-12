@@ -119,6 +119,6 @@ function swiffypay_order_auto_complete_by_payment_method($order_id)
 
 function swiffypay_enable_plugin()
 {
-    add_action('woocommerce_order_status_changed', 'swiffypay_auto_complete_by_payment_method', 99);
+    add_action('woocommerce_order_status_changed', 'swiffypay_order_auto_complete_by_payment_method', 99);
 }
 ?>
