@@ -84,7 +84,7 @@ function swiffypay_woocommerce_missing_notice() {
 }
 
 function swiffypay_check_swiffypay() {
-    if (!class_exists('SwiffyPay')) {
+    if (!class_exists('WC_Gateway_SwiffyPay')) {
         add_action('admin_notices', 'swiffypay_swiffypay_missing_notice');
     }
 }
