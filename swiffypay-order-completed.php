@@ -10,7 +10,8 @@
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
 */
-function swiffypay_add_submenu() {
+// Tambahkan submenu ke menu WooCommerce
+function swiffpay_add_submenu() {
     add_submenu_page(
         'woocommerce',
         'Swiffpay Order Status',
@@ -20,6 +21,7 @@ function swiffypay_add_submenu() {
         'swiffpay_order_status_page'
     );
 }
+
 add_action('admin_menu', 'swiffpay_add_submenu');
 
 function swiffpay_order_status_page() {
