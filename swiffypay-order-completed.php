@@ -96,7 +96,7 @@ function swiffypay_swiffypay_missing_notice() {
 }
 
 
-function swiffypay_order_auto_complete_by_payment_method($order_id)
+function swiffypay_order_auto_complete_by_payment_method($order_id, $from, $to, $order)
 {
     if (!$order_id) {
         return;
@@ -110,17 +110,14 @@ function swiffypay_order_auto_complete_by_payment_method($order_id)
     if ($plugin_enabled) {
         $order = wc_get_order($order_id);
         $new_status_completed = isset($options['new_status_completed']) ? $options['new_status_completed'] : 'completed';
-        if (in_array($order->get_status(), array('processing', 'on-hold'))) {
-            $payment_method = $order->get_payment_method();
-            if ($payment_method === 'swiffypay') {
-                $order->update_status($new_status_completed);
+        if ( $order->get_payment_method() == 'swiffypay' ) {
+            // Check if the transition is from 'processing' to 'completed'
+            if ( 'processing' === $from && 'completed' !== $to ) {
+                // Update the order status to 'completed'
+                $order->update_status( $new_status_completed, __( 'Payment via SwiffyPay completed.', 'woocommerce' ) );
             }
         }
     }
 }
-
-function swiffypay_enable_plugin()
-{
-    add_action('woocommerce_order_status_changed', 'swiffypay_order_auto_complete_by_payment_method', 99);
-}
+add_action('woocommerce_order_status_changed', 'swiffypay_order_auto_complete_by_payment_method', 99);
 ?>
